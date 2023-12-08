@@ -1,18 +1,18 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	23.08.3
+%define		kdeappsver	23.08.4
 %define		qtver		5.15.2
 %define		kf5ver		5.71.0
 %define		kaname		qmlkonsole
 Summary:	A terminal application built for touch
 Name:		ka5-%{kaname}
-Version:	23.08.3
+Version:	23.08.4
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	ddc4b87c6c498e28e274dcd52adb0237
+# Source0-md5:	df8ff6e8c6ea00f39761349ed802761f
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel
 BuildRequires:	Qt5Gui-devel >= 5.15.2
