@@ -1,11 +1,13 @@
 #
 # Conditional build:
-%bcond_with	tests		# build with tests
+%bcond_with	tests		# test suite
+
 %define		kdeappsver	23.08.5
 %define		qtver		5.15.2
 %define		kf5ver		5.71.0
 %define		kaname		qmlkonsole
 Summary:	A terminal application built for touch
+Summary(pl.UTF-8):	Aplikacja terminala dla ekranów dotykowych
 Name:		ka5-%{kaname}
 Version:	23.08.5
 Release:	1
@@ -13,7 +15,7 @@ License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
 # Source0-md5:	204daca108b2822cddc1366324cf9942
-URL:		http://www.kde.org/
+URL:		https://apps.kde.org/qmlkonsole/
 BuildRequires:	Qt5Core-devel
 BuildRequires:	Qt5Gui-devel >= 5.15.2
 BuildRequires:	Qt5Network-devel >= 5.15.10
@@ -43,8 +45,12 @@ Requires:	qmltermwidget
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-A terminal application built for touch, based on
-[qmltermwidget](https://github.com/Swordfish90/qmltermwidget).
+A terminal application built for touch, based on qmltermwidget
+<https://github.com/Swordfish90/qmltermwidget>.
+
+%description -l pl.UTF-8
+Aplikacja terminala dla ekranów dotykowych, oparta na qmltermwidget
+<https://github.com/Swordfish90/qmltermwidget>.
 
 %prep
 %setup -q -n %{kaname}-%{version}
@@ -56,18 +62,19 @@ A terminal application built for touch, based on
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DHTML_INSTALL_DIR=%{_kdedocdir} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+
 %ninja_build -C build
 
 %if %{with tests}
 ctest --test-dir build
 %endif
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %ninja_install -C build
 
-rm -rf $RPM_BUILD_ROOT%{_kdedocdir}/{sr,zh_CN}
+%{__rm} $RPM_BUILD_ROOT%{_kdedocdir}/{sr,zh_CN}
 
 %find_lang %{kaname} --all-name --with-kde
 
