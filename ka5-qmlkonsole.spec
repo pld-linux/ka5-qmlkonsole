@@ -74,9 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %ninja_install -C build
 
-%{__rm} $RPM_BUILD_ROOT%{_kdedocdir}/{sr,zh_CN}
-
-%find_lang %{kaname} --all-name --with-kde
+%find_lang %{kaname} --all-name
 
 %clean
 rm -rf $RPM_BUILD_ROOT
